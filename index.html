@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EH LO, JADI VALENTINO GUA APA KAGA? 🖕💢</title>
+    <meta name="description" content="Ini buat orang yang mentalnya udah baja">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Public+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Public Sans', sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #e5e5e5;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, #2d0a0a, #000000);
+            z-index: -2;
+        }
+
+        .bg-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(180, 40, 40, 0.2);
+            filter: blur(70px);
+            border-radius: 50%;
+        }
+
+        .shape-1 { width: 350px; height: 350px; top: 5%; left: 0%; }
+        .shape-2 { width: 450px; height: 450px; bottom: 5%; right: 0%; background: rgba(130, 20, 20, 0.25); }
+        .shape-3 { width: 250px; height: 250px; top: 50%; left: 60%; }
+        .shape-4 { width: 400px; height: 400px; bottom: 20%; left: 10%; background: rgba(160, 30, 30, 0.15); }
+
+        #app {
+            width: 100%;
+            max-width: 520px;
+            padding: 15px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .page {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .page.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .glass-card {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(220, 60, 60, 0.3);
+            border-radius: 48px;
+            padding: 35px 20px 30px;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.9), 0 0 0 1px rgba(200, 50, 50, 0.2) inset;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(230, 70, 70, 0.25), transparent 70%);
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        h1, p, .button-group, .badge-container, .photo-grid, .envelope-wrapper {
+            position: relative;
+            z-index: 3;
+        }
+
+        h1 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #f0f0f0;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 15px #b32b2b;
+            line-height: 1.3;
+        }
+
+        .title-cursive {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #b0b0b0;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 60px;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.15s all ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 0 #3a0f0f;
+        }
+
+        .btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 1px 0 #3a0f0f;
+        }
+
+        .btn-yes {
+            background: #b32b2b;
+            color: white;
+            border-bottom: 3px solid #6e1a1a;
+            flex: 1;
+        }
+
+        .btn-no {
+            background: #2a2a2a;
+            color: #aaa;
+            border-bottom: 3px solid #151515;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: #b32b2b;
+            color: white;
+            border-bottom: 3px solid #6e1a1a;
+            min-width: 200px;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: #b32b2b;
+            border: 2px solid #b32b2b;
+            box-shadow: none;
+        }
+
+        .btn-small {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        .btn-shine {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(30deg);
+            animation: shine 4s infinite linear;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .floating-hearts {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 100%;
+            pointer-events: none;
+            font-size: 2rem;
+        }
+
+        .float-heart {
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.4;
+        }
+
+        .float-heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .float-heart:nth-child(2) { left: 50%; animation-delay: 1s; }
+        .float-heart:nth-child(3) { left: 80%; animation-delay: 0.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .badge {
+            background: #b32b2b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 60px;
+            display: inline-block;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.5rem;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 10px 0 #6e1a1a;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .photo-item {
+            background: #2a2a2a;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #b32b2b;
+        }
+
+        .photo-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: linear-gradient(45deg, #3a1a1a, #1a1a1a);
+        }
+
+        .envelope-wrapper {
+            margin: 30px 0 20px;
+            cursor: pointer;
+        }
+
+        .envelope-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .envelope {
+            width: 220px;
+            height: 160px;
+            background: #b32b2b;
+            position: relative;
+            border-radius: 20px 20px 10px 10px;
+            box-shadow: 0 15px 0 #6e1a1a;
+        }
+
+        .envelope-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #b32b2b;
+            border-radius: 20px 20px 10px 10px;
+            z-index: 2;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 110px solid transparent;
+            border-right: 110px solid transparent;
+            border-bottom: 50px solid #9e2626;
+            z-index: 1;
+        }
+
+        .letter {
+            position: absolute;
+            width: 180px;
+            height: 120px;
+            background: #f0f0f0;
+            bottom: 10px;
+            left: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            z-index: 3;
+            color: #b32b2b;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 0 #aaa;
+        }
+
+        .envelope.opened .letter {
+            transform: translateY(-60px);
+        }
+
+        .copy-notif {
+            margin-top: 15px;
+            color: #b32b2b;
+            font-weight: bold;
+        }
+
+        /* Ganti semua teks jadi kasar */
+        .btn-text, h1, p, .badge-text, .letter-text, .envelope-hint, .collage-subtitle, .final-emoji, .message-decoration {
+            /* Teks diubah via HTML, ini cuma cadangan */
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+    </div>
+
+    <main id="app">
+        <!-- Page 1: Pertanyaan Inti -->
+        <section id="page1" class="page active">
+            <div class="page-content">
+                <div class="floating-hearts">
+                    <span class="float-heart">💕</span>
+                    <span class="float-heart">💗</span>
+                    <span class="float-heart">💖</span>
+                </div>
+                <div class="glass-card main-card">
+                    <div class="card-glow"></div>
+                    <h1 class="title-main" id="mainQuestion">EH LO, JADI VALENTINO GUA APA KAGA? 🖕</h1>
+                    <p class="subtitle" id="subQuestion">Gue gamau denger jawaban 'TOLAK'</p>
+                    <div class="button-group">
+                        <button id="yesBtn" class="btn btn-yes">
+                            <span class="btn-text">YA GILA</span>
+                            <span class="btn-shine"></span>
+                        </button>
+                        <button id="noBtn" class="btn btn-no">
+                            <span class="btn-text">ENGGAK</span>
+                        </button>
+                    </div>
+                    <p id="noEscapeText" class="escape-text hidden">MAU GAK MAU TETEP HARUS MAU, BANGSAT!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 2: Konfirmasi -->
+        <section id="page2" class="page">
+            <div class="page-content">
+                <div class="glass-card">
+                    <div class="card-glow"></div>
+                    <div class="emoji-bounce">💢</div>
+                    <h1 class="title-cursive" id="confirmTitle">NAH GITU DONG, ANJIR!</h1>
+                    <div class="confirmation-box">
+                        <p id="confirmText">Lo resmi jadi milik gue sekarang. Kontol.</p>
+                        <div class="badge-container">
+                            <div class="badge">
+                                <span class="badge-text">VALENTINO GUA</span>
+                                <div class="badge-sparkle"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button id="nextToPage3" class="btn btn-primary">
+                            <span class="btn-text">LANJUT, JANGAN BACOT</span>
+                            <span class="btn-shine"></span>
+                        </button>
+                        <button id="backToPage1" class="btn btn-ghost btn-small">LO MAU NGULANG?</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 3: Kado -->
+        <section id="page3" class="page">
+            <div class="page-content flower-page">
+                <div class="glass-card">
+                    <div class="card-glow"></div>
+                    <h1 class="title-cursive" id="flowerTitle">NIH KADO BUAT LO, BANGSAT</h1>
+                    <div class="bouquet-wrapper">
+                        <div class="bouquet-glow"></div>
+                        <div class="bouquet" id="bouquet">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23b32b2b'/%3E%3Ctext x='50' y='65' text-anchor='middle' fill='white' font-size='25' font-family='Arial' font-weight='bold'%3E💐%3C/text%3E%3C/svg%3E" alt="Buket Bunga" class="bouquet-img" style="max-width: 180px;">
+                        </div>
+                    </div>
+                    <p id="bouquetMessage" class="bouquet-message hidden">RESMI LO PUNYA GUE, TAI!</p>
+                    <div class="button-group">
+                        <button id="takeBouquet" class="btn btn-primary">
+                            <span class="btn-text">GUE TERIMA, CUIH</span>
+                            <span class="btn-shine"></span>
+                        </button>
+                        <button id="nextToPage4" class="btn btn-primary hidden">
+                            <span class="btn-text">LANJUT, CEPET</span>
+                            <span class="btn-shine"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 4: Kolase -->
+        <section id="page4" class="page">
+            <div class="page-content">
+                <div class="glass-card collage-card">
+                    <div class="card-glow"></div>
+                    <h1 class="title-cursive" id="collageTitle">NI MUKA LO, GUE SUKA</h1>
+                    <p class="collage-subtitle" id="collageSubtitle">Lo jelek tapi berharga. Makanya lo jadi milik gue. 🖕💕</p>
+                    <div class="photo-grid">
+                        <div class="photo-item">
+                            <div class="photo-preview" style="background: #6e1a1a; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">😈</div>
+                        </div>
+                        <div class="photo-item">
+                            <div class="photo-preview" style="background: #4a0f0f; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">💀</div>
+                        </div>
+                        <div class="photo-item">
+                            <div class="photo-preview" style="background: #8f2424; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">👹</div>
+                        </div>
+                        <div class="photo-item">
+                            <div class="photo-preview" style="background: #b32b2b; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">🤡</div>
+                        </div>
+                    </div>
+                    <button id="nextToPage5" class="btn btn-primary">
+                        <span class="btn-text">TERAKHIR, SABAR BANGSAT</span>
+                        <span class="btn-shine"></span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 5: Surat Terakhir -->
+        <section id="page5" class="page">
+            <div class="page-content">
+                <div class="envelope-wrapper" id="envelopeWrapper">
+                    <div class="envelope-container">
+                        <div class="envelope" id="envelope">
+                            <div class="envelope-back"></div>
+                            <div class="letter" id="letter">
+                                <div class="letter-content">
+                                    <span class="letter-heart">🖕</span>
+                                    <span class="letter-text">BUAT LO</span>
+                                </div>
+                            </div>
+                            <div class="envelope-front"></div>
+                            <div class="envelope-flap"></div>
+                        </div>
+                    </div>
+                    <p class="envelope-hint" id="envelopeHint">PENCET, JANGAN MAALU</p>
+                </div>
+
+                <div class="glass-card final-card hidden" id="finalContent">
+                    <div class="card-glow"></div>
+                    <div class="final-emoji">💞</div>
+                    <h1 class="title-cursive title-final" id="finalTitle">SELAMAT VALENTINE, BANGSAT</h1>
+                    <div class="message-box">
+                        <div class="message-decoration">✨</div>
+                        <p id="finalMessage">
+                            Makasih tai, lo udah mau jadi milik gue. Gue harap lo betah sama kontol ini. Happy Valentine, dasar makhluk brengsek! 💕🖕
+                        </p>
+                        <div class="message-decoration right">✨</div>
+                    </div>
+                    <div class="button-group final-buttons">
+                        <button id="restartBtn" class="btn btn-ghost">
+                            <span class="btn-text">ULANG</span>
+                        </button>
+                        <button id="copyBtn" class="btn btn-primary">
+                            <span class="btn-text">SALIN BACAAN</span>
+                            <span class="btn-shine"></span>
+                        </button>
+                    </div>
+                    <p id="copyNotif" class="copy-notif hidden">UDH GUE SALIN, BANGSAT!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Semua fungsi tetep sama, cuma buat navigasi
+        const pages = {
+            page1: document.getElementById('page1'),
+            page2: document.getElementById('page2'),
+            page3: document.getElementById('page3'),
+            page4: document.getElementById('page4'),
+            page5: document.getElementById('page5')
+        };
+
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const backToPage1 = document.getElementById('backToPage1');
+        const nextToPage3 = document.getElementById('nextToPage3');
+        const takeBouquet = document.getElementById('takeBouquet');
+        const nextToPage4 = document.getElementById('nextToPage4');
+        const nextToPage5 = document.getElementById('nextToPage5');
+        const restartBtn = document.getElementById('restartBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const noEscapeText = document.getElementById('noEscapeText');
+        const bouquetMessage = document.getElementById('bouquetMessage');
+        const envelopeWrapper = document.getElementById('envelopeWrapper');
+        const envelope = document.getElementById('envelope');
+        const finalContent = document.getElementById('finalContent');
+        const copyNotif = document.getElementById('copyNotif');
+
+        let noClickCount = 0;
+
+        function showPage(pageId) {
+            Object.values(pages).forEach(p => p.classList.remove('active'));
+            pages[pageId].classList.add('active');
+        }
+
+        yesBtn.addEventListener('click', () => {
+            showPage('page2');
+        });
+
+        noBtn.addEventListener('click', () => {
+            noClickCount++;
+            if (noClickCount === 1) {
+                noEscapeText.classList.remove('hidden');
+                noEscapeText.textContent = 'MAU GAK MAU TETEP HARUS MAU, BANGSAT!';
+            } else if (noClickCount === 2) {
+                noEscapeText.textContent = 'GUE BILANG HARUS MAU, KONTOL!';
+            } else if (noClickCount >= 3) {
+                noEscapeText.textContent = 'DAH, GUE GA TERIMA LO NOLAK!';
+                setTimeout(() => {
+                    showPage('page2');
+                }, 500);
+            }
+        });
+
+        backToPage1.addEventListener('click', () => {
+            showPage('page1');
+            noClickCount = 0;
+            noEscapeText.classList.add('hidden');
+        });
+
+        nextToPage3.addEventListener('click', () => {
+            showPage('page3');
+        });
+
+        takeBouquet.addEventListener('click', () => {
+            bouquetMessage.classList.remove('hidden');
+            takeBouquet.classList.add('hidden');
+            nextToPage4.classList.remove('hidden');
+        });
+
+        nextToPage4.addEventListener('click', () => {
+            showPage('page4');
+        });
+
+        nextToPage5.addEventListener('click', () => {
+            showPage('page5');
+        });
+
+        envelopeWrapper.addEventListener('click', () => {
+            envelope.classList.add('opened');
+            setTimeout(() => {
+                envelopeWrapper.classList.add('hidden');
+                finalContent.classList.remove('hidden');
+            }, 500);
+        });
+
+        restartBtn.addEventListener('click', () => {
+            showPage('page1');
+            noClickCount = 0;
+            noEscapeText.classList.add('hidden');
+            envelope.classList.remove('opened');
+            envelopeWrapper.classList.remove('hidden');
+            finalContent.classList.add('hidden');
+            bouquetMessage.classList.add('hidden');
+            takeBouquet.classList.remove('hidden');
+            nextToPage4.classList.add('hidden');
+        });
+
+        copyBtn.addEventListener('click', async () => {
+            const text = document.getElementById('finalMessage').innerText;
+            try {
+                await navigator.clipboard.writeText(text);
+                copyNotif.classList.remove('hidden');
+                setTimeout(() => copyNotif.classList.add('hidden'), 2000);
+            } catch (err) {
+                alert('GAGAL, COBA LAGI TAI!');
+            }
+        });
+    </script>
+</body>
+</html>
